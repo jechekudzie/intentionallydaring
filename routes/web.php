@@ -21,6 +21,9 @@ Route::get('/generate_qrcode_general', [\App\Http\Controllers\QrCodeController::
 Route::post('/pay-now', [\App\Http\Controllers\PaymentsController::class, 'initiatePayment'])->name('initiate_payment');
 Route::get('/paynow/return', [\App\Http\Controllers\PaymentsController::class, 'checkPayment'])->name('check_payment');
 
+Route::post('/upload-ticket', [\App\Http\Controllers\QrCodeController::class,'upload'])->name('ticket.upload');
+
+
 Route::get('/', function () {
     return view('index');
 });

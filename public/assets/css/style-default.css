@@ -10244,7 +10244,7 @@ lgx-zoomInUp
   margin-top: -258px;
 }
 .lgx-registration-form-box {
-  background: url('../img/registrationbox-bg.jpg') center center no-repeat;
+  background: #fd5e53;
   -webkit-background-size: cover;
   -o-background-size: cover;
   -moz-background-size: cover;

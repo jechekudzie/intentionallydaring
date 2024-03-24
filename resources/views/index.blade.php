@@ -92,7 +92,7 @@
         .price-header .price {
             font-size: 48px; /* Adjust size as needed */
             font-weight: bold; /* Adjust weight as needed */
-            color: #FFA500; /* This is an orange color; adjust as needed */
+            color: #f9fc00; /* This is an orange color; adjust as needed */
             /* Add other styles for your price as needed */
         }
 
@@ -134,7 +134,7 @@
                                 <span class="icon-bar"></span>
                             </button>
                             <div class="lgx-logo">
-                                <a href="index.html" class="lgx-scroll">
+                                <a href="{{url('/')}}" class="lgx-scroll">
                                     {{--<img src="assets/img/logo.png" alt="Eventhunt Logo"/>--}}
                                 </a>
                             </div>
@@ -145,87 +145,7 @@
                                     <a class="lgx-btn lgx-btn-red" href="#">Buy Ticket</a>
                                 </div>
                             </div>
-                            {{-- <ul class="nav navbar-nav lgx-nav navbar-right">
-                                 <li>
-                                     <a href="index.html" class="dropdown-toggle active" data-toggle="dropdown"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Home <span
-                                             class="caret"></span></a>
-                                     <ul class="dropdown-menu multi-level">
-                                         <li><a href="index.html">Home (Default)</a></li>
-                                         <li><a href="index2.html">Box Layout</a></li>
-                                         <li><a href="index3.html">Home Parallax</a></li>
-                                         <li><a href="index4.html">Home Four</a></li>
-                                         <li><a href="index5.html">Home Typed</a></li>
-                                         <li><a href="index6.html">Home Six</a></li>
-                                         <li><a href="index7.html">Home Seven</a></li>
-                                         <li><a href="index8.html">Home Eight</a></li>
-                                         <li><a href="index9.html">Home Registration</a></li>
-                                         <li><a href="index10.html">Home Registration2</a></li>
-                                         <li><a href="index11.html">Home Eleven</a></li>
-                                         <li><a href="index12.html">Home Twelve</a></li>
-                                         <li><a href="index13.html">Home Slider</a></li>
-                                         <li><a href="index14.html">Home Slider2</a></li>
-                                         <li><a href="index15.html">Home Music</a></li>
-                                         <li><a href="index16.html">Home Sixteen</a></li>
-                                         <li><a href="index17.html">Home Christmas</a></li>
-                                         <li><a href="index18.html">Home Comingsoon</a></li>
-                                     </ul>
-                                 <li>
-                                 <li><a href="index.html" class="dropdown-toggle active" data-toggle="dropdown"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Pages <span
-                                             class="caret"></span></a>
-                                     <ul class="dropdown-menu multi-level">
-                                         <li><a href="about.html">About</a></li>
-                                         <li><a href="schedules.html">Schedule</a></li>
-                                         <li class="dropdown-submenu">
-                                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown"
-                                                role="button" aria-haspopup="true" aria-expanded="false">Speakers <span
-                                                     class="caret"></span></a>
-                                             <ul class="dropdown-menu">
-                                                 <li><a href="speakers.html">Speakers List</a></li>
-                                                 <li><a href="speaker.html">Speaker Single</a></li>
-                                             </ul>
-                                         </li>
-                                         <li><a href="sponsors.html">Sponsors List</a></li>
-                                         <li><a href="registration.html">Registration</a></li>
-                                         <li><a href="gallery.html">Photo Gallery</a></li>
-                                         <li><a href="contact.html">Contact</a></li>
-                                         <li class="dropdown-submenu">
-                                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown"
-                                                role="button" aria-haspopup="true" aria-expanded="false">News <span
-                                                     class="caret"></span></a>
-                                             <ul class="dropdown-menu">
-                                                 <li><a href="news.html">News</a></li>
-                                                 <li><a href="news-single.html">News Single</a></li>
-                                             </ul>
-                                         </li>
-                                         <li><a href="contact.html">Contact</a></li>
-                                         <li class="dropdown-submenu">
-                                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown"
-                                                role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span
-                                                     class="caret"></span></a>
-                                             <ul class="dropdown-menu">
-                                                 <li class="dropdown-submenu">
-                                                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown"
-                                                        role="button" aria-haspopup="true" aria-expanded="false">Dropdown
-                                                         Two<span class="caret"></span></a>
-                                                     <ul class="dropdown-menu">
-                                                         <li><a href="#">Dropdown Three</a></li>
-                                                         <li><a href="#">Dropdown Three</a></li>
-                                                     </ul>
-                                                 </li>
-                                                 <li><a href="#">Dropdown Two</a></li>
-                                                 <li><a href="#">Dropdown Two</a></li>
-                                             </ul>
-                                         </li>
-                                     </ul>
-                                 </li>
-                                 <li><a class="lgx-scroll" href="#lgx-speakers">Speaker</a></li>
-                                 <li><a class="lgx-scroll" href="#lgx-schedule">Schedule</a></li>
-                                 <li><a class="lgx-scroll" href="#lgx-sponsors">Sponsors</a></li>
-                                 <li><a class="lgx-scroll" href="#lgx-news">News</a></li>
-                                 <li><a class="lgx-scroll" href="contact.html">Contact</a></li>
-                             </ul>--}}
+
                         </div><!--/.nav-collapse -->
                     </nav>
                 </div>
@@ -239,7 +159,7 @@
     <!--BANNER-->
     <section>
         <div class="lgx-banner lgx-banner6"
-             style="background: url('{{ asset('banner.png') }}') top center no-repeat; -webkit-background-size: cover; -o-background-size: cover; -moz-background-size: cover; background-size: contain; width:100%;height: 912px;">
+             style="background: url('{{ asset('banner.png') }}') top center no-repeat; -webkit-background-size: cover; -o-background-size: cover; -moz-background-size: cover; background-size: cover; /*width:100%;height: 912%;*/">
             <div class="lgx-banner-style">
                 <div class="lgx-inner lgx-inner-fixed">
                     <div class="container">
@@ -249,14 +169,14 @@
                                     <!--lgx-banner-info-center lgx-banner-info-black lgx-banner-info-big lgx-banner-info-bg-->
                                     <h3 class="subtitle">{{--You can learn anything--}}</h3>
                                     <h2 class="title">{{--Conference--}}{{-- <span><b>2</b><b>0</b><b>1</b><b>9</b></span>--}}</h2>
-                                    <h3 class="date"><i class="fa fa-calendar"></i> {{--23-27 September, 2018--}}</h3>
-                                    <h3 class="location"><i
-                                            class="fa fa-map-marker"></i> {{--21 King Street, Dhaka 1205, Bangladesh--}}
-                                        .</h3>
+                                    <h3 class="date">{{--<i class="fa fa-calendar"></i>--}} {{--23-27 September, 2018--}}</h3>
+                                    <h3 class="location">
+                                        {{--<i class="fa fa-map-marker"></i> --}}{{--21 King Street, Dhaka 1205, Bangladesh--}}
+                                    </h3>
                                     <div class="action-area">
-                                        {{-- <div class="lgx-video-area">
-                                             <a class="lgx-btn lgx-btn-red" href="#">Buy Ticket</a>
-                                         </div>--}}
+                                         <div class="lgx-video-area">
+                                            {{-- <a class="lgx-btn lgx-btn-red" href="#">Buy Ticket</a>--}}
+                                         </div>
                                     </div>
                                 </div>
                             </div>
@@ -274,22 +194,26 @@
 
     <!--ABOUT-->
     <section>
-        <div id="lgx-about" class="lgx-about">
+        <div class="lgx-about">
             <div class="lgx-inner">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
-                            <div class="lgx-about-content-area">
+                            <div {{--style="margin-top: -60px;"--}} class="lgx-about-content-area">
                                 <div class="lgx-heading">
                                     <h2 class="heading">IN GOOD COMPANY</h2>
                                     <h3 class="subheading">A Poetry & Spoken Word Experience</h3>
                                 </div>
                                 <div class="lgx-about-content">
-                                    <p class="text">
+                                    <p style="font-size: 20px;text-align: justify;" class="text">
                                         "As the busy week winds down, a glimmer of hope emerges on the horizon as the
                                         weekend approaches, promising days of relaxation ahead. That's precisely how
                                         Thursday evenings can be described – a taste of the weekend's ambiance, though
-                                        not yet fully indulgent as Friday awaits its turn. This makes Thursday the ideal
+                                        not yet fully indulgent as Friday awaits its turn.
+
+                                        <br/>
+                                        <br/>
+                                        This makes Thursday the ideal
                                         day to immerse oneself in the world of poetry and spoken word, to savour an
                                         unplugged performance by a beloved artist, all while relishing the finest treats
                                         from The Vanilla Moon. It's a simple yet sophisticated way to reconnect with
@@ -298,10 +222,10 @@
 
                                     </p>
                                     <div class="section-btn-area">
-                                       {{-- <button id="usdButton" class="lgx-btn">USD</button>
-                                        <button id="zwlButton" class="lgx-btn lgx-btn-red lgx-scroll">ZWL
-                                            Ticket
-                                        </button>--}}
+                                        {{-- <button id="usdButton" class="lgx-btn">USD</button>
+                                         <button id="zwlButton" class="lgx-btn lgx-btn-red lgx-scroll">ZWL
+                                             Ticket
+                                         </button>--}}
                                     </div>
                                 </div>
                             </div>
@@ -318,29 +242,29 @@
                                     <input type="hidden" name="currentCurrency" value="USD">
                                     <input type="hidden" name="description" value="In Good Company Ticket">
 
-                                <div class="lgx-registration-form">
-                                    <input name="name" value="" class="wpcf7-form-control form-control"
-                                           placeholder="Your Name ..." type="text" required>
-                                    <input name="email" value="" class="wpcf7-form-control form-control"
-                                           placeholder="Your E-mail ..." type="email" required>
-                                    <input name="mobile" value="" class="wpcf7-form-control form-control"
-                                           placeholder="Mobile Number ..." type="text" required>
-                                    <input value="1" min="1" id="ticketNumber" name="tickets"
-                                           class="wpcf7-form-control form-control"
-                                           placeholder="tickets" type="number" required>
+                                    <div class="lgx-registration-form">
+                                        <input style="font-size: 16px;" name="name" value="" class="wpcf7-form-control form-control"
+                                               placeholder="Your Full Name ..." type="text" required>
+                                        <input style="font-size: 16px;" name="email" value="" class="wpcf7-form-control form-control"
+                                               placeholder="Your E-mail ..." type="email" required>
+                                        <input style="font-size: 16px;" name="mobile" value="" class="wpcf7-form-control form-control"
+                                               placeholder="Mobile Number ..." type="text" required>
+                                        <input style="font-size: 16px;" value="1" min="1" id="ticketNumber" name="tickets"
+                                               class="wpcf7-form-control form-control"
+                                               placeholder="tickets" type="number" required>
 
 
-                                    <button id="usdButton" type="button" class="lgx-btn lgx-btn-red">USD</button>
-                                    <button id="zwlButton" type="button" class="lgx-btn lgx-btn-red lgx-scroll">ZWL
-                                        Ticket
-                                    </button>
+                                        <button style="font-size: 16px;" id="usdButton" type="button" class="lgx-btn lgx-btn-blue">$USD</button>
+                                        <button style="font-size: 16px;" id="zwlButton" type="button" class="lgx-btn lgx-btn-red lgx-scroll">$ZWL</button>
 
-                                    <input  value="Registration Now" class="wpcf7-form-control wpcf7-submit lgx-submit"
-                                           type="submit">
-                                </div>
+                                        <input style="font-size: 25px;" value="BUY TICKET(s)" class="wpcf7-form-control wpcf7-submit lgx-submit"
+                                               type="submit">
+                                    </div>
                                 </form>
                             </div>
                         </div>
+
+
                     </div>
                 </div><!-- //.CONTAINER -->
             </div><!-- //.INNER -->

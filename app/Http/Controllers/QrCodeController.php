@@ -14,6 +14,38 @@ use function Termwind\render;
 class QrCodeController extends Controller
 {
     //
+    public function upload(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $ticketNumber = $request->input('ticketNumber');
+
+            // Save the file path to the database
+            $ticket = Ticket::where('ticket_number', $ticketNumber)->first();
+
+            $event = Event::where('id', $ticket->event_id)->first();
+
+            $baseDirectory = public_path('qr_pdf/'.$event->prefix.'/');
+
+            $originalName = $file->getClientOriginalName();
+
+            // Generate a unique filename to avoid overwriting existing files
+            $filename = time() . '_' . $originalName;
+
+            // Build the path within the public directory
+            $path = public_path($filename);
+
+            // Move the file to the public directory
+            $path = $file->move($baseDirectory, $filename);
+
+            $ticket->update([
+                'path' => $path,
+            ]);
+            return response()->json(['message' => 'File uploaded successfully', 'filename' => $filename]);
+        }
+
+        return response()->json(['message' => 'No file uploaded'], 400);
+    }
 
     public function generate()
     {
@@ -76,7 +108,7 @@ class QrCodeController extends Controller
 
         $tickets = []; // Initialize your tickets array
 
-        for ($i = 1; $i <= 2; $i++) {
+        for ($i = 1; $i <= 60; $i++) {
             $formattedNumber = str_pad($i, 4, '0', STR_PAD_LEFT);
             $ticketNumber = $event->prefix . '-' . $formattedNumber;
 

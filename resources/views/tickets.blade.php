@@ -3,35 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Ticket Design</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /*.ticket-number {
-            writing-mode: vertical-lr;
-            transform: rotate(180deg);
-            text-align: center;
-        }*/
-        /*
-                .admit-one {
-                    writing-mode: vertical-lr;
-                    transform: rotate(180deg);
-                    text-align: center;
-                }*/
-
-        .div-with-dotted-border-right {
-            height: 300px;
-            position: relative;
-            background-color: #dbf935;
-            border-right: 5px dotted #dbf935;
+        @media only screen and (max-width: 600px) {
+            /* Adjust styles for mobile here */
+            .ticket-row {
+                /* Example: Stack columns vertically in mobile view */
+                flex-direction: column;
+            }
+            /* Adjust the size and position of elements to fit mobile screens */
         }
-
-        /*.qr_code img {
-            max-width: 100px; !* or any size *!
-            max-height: 100px; !* or any size *!
-            margin-top: 20px; !* adjust as needed *!
-            !* Add more styling as needed *!
-        }*/
 
     </style>
 </head>
@@ -39,11 +24,15 @@
 
 <div style="margin-top: 20px;" class="container">
     <button class="btn btn-primary" onclick="downloadAllTickets()">Download All Tickets</button>
+    <button class="btn btn-primary" onclick="downloadAllPDFs()">Download All Tickets as PDF</button>
+    <button class="btn btn-primary" onclick="downloadAllImages()">Download All Tickets as Images</button>
+
 
     <br/>
     <br/>
 
     @foreach($tickets as $ticket)
+
         <div class="row ticket-row" id="ticket-{{ $ticket['ticketNumber'] }}">
             <div style="background-color: #dbf935; text-align: center;" class="col-md-2">
                 <div style="margin-top: 60%;  text-align: center;">
@@ -71,7 +60,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="container">
-                                <div class="row">
+                                <div style="font-weight: bolder" class="row">
                                     <div class="col-md-6">
                                         <h5>Venue</h5>
                                         <p>The Vanilla Moon<br>64 Sam Nujoma Street, Harare</p>
@@ -101,8 +90,6 @@
         </div>
         <br/>
         <br/>
-
-
     @endforeach
 
 </div>
@@ -114,19 +101,45 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
+
 <script>
+
+    window.onload = function() {
+        rendAndDownload(); // If you want to download and upload all tickets as PDFs when the page loads
+        // downloadAllImages(); // Uncomment if you also want to download and upload all tickets as images when the page loads
+    };
+
+    function rendAndDownload() {
+        document.querySelectorAll('.ticket-row').forEach((ticket, index) => {
+            const ticketId = ticket.getAttribute('id');
+            const ticketNumber = ticketId.replace('ticket-', '');
+            // Introduce a slight delay for each ticket to avoid overwhelming the browser/server
+            setTimeout(() => {
+                printPDFAndUpload(ticketId, ticketNumber);
+            }, index * 2000);
+        });
+    }
+
     function downloadAllTickets() {
-        const tickets = document.querySelectorAll('.ticket-row'); // Assuming each ticket has a 'ticket-row' class
-        tickets.forEach((ticket, index) => {
-            const ticketNumber = ticket.id.replace('ticket-', '');
-            setTimeout(() => { // Adding a timeout to prevent triggering all downloads at once
-                printImage(ticket.id, ticketNumber);
-                printPDF(ticket.id, ticketNumber);
-            }, index * 1000); // Increase the delay for each ticket to ensure they don't overlap
+        document.querySelectorAll('.ticket-row').forEach(ticket => {
+            const ticketId = ticket.getAttribute('id');
+            const ticketNumber = ticketId.replace('ticket-', '');
+            // You can choose to either print as image or PDF here, or both
+            printImageAndUpload(ticketId, ticketNumber);
+            printPDFAndUpload(ticketId, ticketNumber);
         });
     }
 
-    function printImage(divId, ticketNumber) {
+    //images starts here
+    function downloadAllImages() {
+        document.querySelectorAll('.ticket-row').forEach(ticket => {
+            const ticketId = ticket.getAttribute('id');
+            const ticketNumber = ticketId.replace('ticket-', '');
+            printImageAndUpload(ticketId, ticketNumber);
+        });
+    }
+
+    function printImageAndUpload(divId, ticketNumber) {
         const div = document.getElementById(divId);
 
         html2canvas(div, {
@@ -136,17 +149,23 @@
             logging: true,
             useCORS: true
         }).then(canvas => {
-            let imgData = canvas.toDataURL('image/png');
-            let link = document.createElement('a');
-            link.download = `ticket_${ticketNumber}.png`; // Dynamic filename
-            link.href = imgData;
-            document.body.appendChild(link); // Temporarily add link to body for triggering download
-            link.click();
-            document.body.removeChild(link); // Remove the link after triggering the download
+            canvas.toBlob(function(blob) {
+                uploadFile(blob, `ticket_${ticketNumber}.png`, ticketNumber);
+            }, 'image/png');
         });
     }
 
-    function printPDF(divId, ticketNumber) {
+
+    //pdfs starts here
+    function downloadAllPDFs() {
+        document.querySelectorAll('.ticket-row').forEach(ticket => {
+            const ticketId = ticket.getAttribute('id');
+            const ticketNumber = ticketId.replace('ticket-', '');
+            printPDFAndUpload(ticketId, ticketNumber);
+        });
+    }
+
+    function printPDFAndUpload(divId, ticketNumber) {
         const div = document.getElementById(divId);
 
         html2canvas(div, {
@@ -156,17 +175,72 @@
             logging: true,
             useCORS: true
         }).then(canvas => {
-            let imgData = canvas.toDataURL('image/jpeg', 1.0);
+            const imgData = canvas.toDataURL('image/jpeg', 1.0);
             const pdf = new jspdf.jsPDF({
                 orientation: 'landscape',
                 unit: 'px',
                 format: [canvas.width, canvas.height]
             });
+
             pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height);
-            pdf.save(`ticket_${ticketNumber}.pdf`);
+
+            // Convert PDF to a Blob
+            const blob = pdf.output('blob');
+
+            // Upload the Blob using your upload function
+            uploadFile(blob, `ticket_${ticketNumber}.pdf`, ticketNumber);
         });
     }
 
+
+    function uploadFile(blob, filename, ticketNumber) {
+        const formData = new FormData();
+        formData.append('file', blob, filename);
+        formData.append('ticketNumber', ticketNumber); // Append ticket number to the form data
+
+        // Fetch the CSRF token from the meta tag
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch('/upload-ticket', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken, // Include the CSRF token in the request headers
+            },
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+
+    /*function uploadFile(blob, filename, ticketNumber) {
+        const formData = new FormData();
+        formData.append('file', blob, filename);
+        formData.append('ticketNumber', ticketNumber); // Now properly scoped
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch('/upload-ticket', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+            },
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+*/
 
 
 </script>
