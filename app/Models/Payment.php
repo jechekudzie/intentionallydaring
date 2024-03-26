@@ -9,7 +9,7 @@ use Spatie\Sluggable\SlugOptions;
 
 class Payment extends Model
 {
-    use HasFactory,HasSlug;
+    use HasFactory;
 
     protected $guarded = [];
 
@@ -28,15 +28,4 @@ class Payment extends Model
         return $this->belongsTo(Event::class);
     }
 
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('address')
-            ->saveSlugsTo('slug');
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
 }

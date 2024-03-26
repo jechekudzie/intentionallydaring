@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->string('ticket_number')->unique();
             $table->string('name')->nullable();
+            $table->string('path')->nullable();
+            $table->boolean('is_hard_copy')->default(0);
             $table->boolean('is_used')->default(0);
             $table->timestamps();
         });

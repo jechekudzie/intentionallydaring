@@ -21,7 +21,7 @@ class Customer extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('address')
+            ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
 

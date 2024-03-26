@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +22,19 @@ Route::get('/generate_qrcode_general', [\App\Http\Controllers\QrCodeController::
 Route::post('/pay-now', [\App\Http\Controllers\PaymentsController::class, 'initiatePayment'])->name('initiate_payment');
 Route::get('/paynow/return', [\App\Http\Controllers\PaymentsController::class, 'checkPayment'])->name('check_payment');
 
+Route::get('/confirmation', [\App\Http\Controllers\PaymentsController::class, 'confirmation'])->name('check_payment');
+Route::get('/igc/{reference}', [\App\Http\Controllers\PaymentsController::class, 'orderDetails'])->name('order_details');
+
 Route::post('/upload-ticket', [\App\Http\Controllers\QrCodeController::class,'upload'])->name('ticket.upload');
 
 
+Route::post('/subscribe', [SubscriptionController::class, 'store']);
+
 Route::get('/', function () {
+    return view('index');
+});
+
+Route::get('/igc', function () {
     return view('index');
 });
 

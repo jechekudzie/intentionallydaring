@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('event_id');
+            $table->string('currency');
             $table->decimal('total_amount', 10, 2);
-            $table->integer('tickets');
+            $table->integer('number_of_tickets');
             $table->string('payment_method');
             $table->string('status');
             $table->string('reference')->nullable();
+            $table->string('pollUrl')->nullable();
             $table->string('paynowreference')->nullable();
             $table->string('payment_date');
             $table->timestamps();

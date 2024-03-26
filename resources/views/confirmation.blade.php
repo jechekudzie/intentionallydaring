@@ -3,9 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    {{--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>--}}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head -->
 
     <!-- SITE TITLE -->
@@ -99,67 +97,6 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
             margin-left: 5px; /* Adjust spacing as needed */
             /* Add other styles for your time period as needed */
         }
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-
-        .background-div {
-            background: url('{{ asset('banner (1).svg') }}') no-repeat center center;
-            background-size: cover;
-            width: 100%;
-            height: 100vh;
-        }
-
-        /* Smallest devices (phones, 600px and down) */
-        @media only screen and (max-width: 600px) {
-            .background-div {
-                background-size: contain;
-                background-position: top center;
-                height: 100%;
-
-            }
-            .lgx-registration-form-box {
-                margin-top: -25px;
-            }
-
-            .lgx-about-content-area{
-                margin-top: 25px;
-            }
-        }
-
-        /* Medium devices (tablets, 768px and up) */
-        @media only screen and (min-width: 600px) and (max-width: 768px) {
-            .background-div {
-                background-size: cover;
-                background-position: top center;
-                height: 40vh;
-
-            }
-            .lgx-registration-form-box {
-                margin-top: -20px;
-            }
-
-            .lgx-about-content-area{
-                margin-top: 25px;
-            }
-        }
-
-        /* Large devices (desktops, 992px and up) */
-        @media only screen and (min-width: 992px) {
-            .background-div {
-                background-size: cover;
-            }
-        }
-
-        /* Extra large devices (large desktops, 1200px and up) */
-        @media only screen and (min-width: 1200px) {
-            .background-div {
-                background-size: cover;
-
-            }
-        }
 
     </style>
 </head>
@@ -199,7 +136,8 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
                         <div id="navbar" class="navbar-collapse collapse">
                             <div class="lgx-nav-right navbar-right">
                                 <div class="lgx-cart-area">
-                                    <a class="lgx-btn lgx-btn-red" href="#buy">Buy Ticket</a>
+                                    <a class="lgx-btn lgx-btn-red" href="{{url('/')}}">Home</a>
+                                    <a class="lgx-btn lgx-btn-red" href="{{url('/')}}">Buy Ticket</a>
                                 </div>
                             </div>
 
@@ -215,7 +153,8 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
 
     <!--BANNER-->
     <section>
-        <div class="{{--lgx-banner lgx-banner6--}} background-div" {{--style="background: url('{{ asset('banner.jpg') }}') top center no-repeat; background-size: cover; width: 100%; height: 100vh;"--}}>
+        <div class="lgx-banner lgx-banner6"
+             style="background: url('{{ asset('banner.png') }}') top center no-repeat; -webkit-background-size: cover; -o-background-size: cover; -moz-background-size: cover; background-size: cover; /*width:100%;height: 912%;*/">
             <div class="lgx-banner-style">
                 <div class="lgx-inner lgx-inner-fixed">
                     <div class="container">
@@ -249,87 +188,76 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
 
 
     <!--ABOUT-->
-    <section id="buy">
+    <section>
         <div class="lgx-about">
             <div class="lgx-inner">
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-sm-12 col-md-6">
-                            <div class="lgx-registration-form-box lgx-about-registration-box">
-                                <h3 class="title price-header">Tickets
-                                    <span class="price">$10</span>
-                                </h3>
-                                <form method="post" action="{{url(route('initiate_payment'))}}">
-                                    @csrf
-                                    <!-- Hidden fields to store total amount and currency -->
-                                    <input type="hidden" name="totalAmount" value="">
-                                    <input type="hidden" name="currentCurrency" value="USD">
-                                    <input type="hidden" name="description" value="In Good Company Ticket">
+                        <!-- Payment Confirmation Panel -->
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Payment Confirmation</h3>
 
-                                    <div class="lgx-registration-form">
-                                        <input style="font-size: 16px;" name="name" value=""
-                                               class="wpcf7-form-control form-control"
-                                               placeholder="Your Full Name ..." type="text" required>
-                                        <input style="font-size: 16px;" name="email" value=""
-                                               class="wpcf7-form-control form-control"
-                                               placeholder="Your E-mail ..." type="email" required>
-                                        <input style="font-size: 16px;" name="mobile" value=""
-                                               class="wpcf7-form-control form-control"
-                                               placeholder="Mobile Number ..." type="text" required>
-                                        <input style="font-size: 16px;" value="1" min="1" id="ticketNumber"
-                                               name="tickets"
-                                               class="wpcf7-form-control form-control"
-                                               placeholder="tickets" type="number" required>
+                                <p>Copy this link as your Order Reference <a href="{{url('/igc/'.$payment->reference)}}" target="_blank">
+                                        ({{$payment->reference}})</a> and save it securely, or <a
+                                        href="{{$whatsAppLink}}" target="_blank">click here to chat with us on WhatsApp
+                                        and save it there.</a></p>
 
-
-                                        <button style="font-size: 16px;" id="usdButton" type="button"
-                                                class="lgx-btn lgx-btn-blue">$USD
-                                        </button>
-                                        <button style="font-size: 16px;display: none" id="zwlButton" type="button"
-                                                class="lgx-btn lgx-btn-red lgx-scroll">$ZWL
-                                        </button>
-
-                                        <input style="font-size: 25px;" value="BUY TICKET(s)"
-                                               class="wpcf7-form-control wpcf7-submit lgx-submit"
-                                               type="submit">
-                                    </div>
-                                </form>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">Name:</th>
+                                        <td>{{$customer['name']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Total Amount:</th>
+                                        <td>${{$payment->currency}}{{$payment['total_amount']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Number of Tickets:</th>
+                                        <td>{{$payment['number_of_tickets']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Payment Reference Number:</th>
+                                        <td>{{$payment->paynowreference}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Payment Status:</th>
+                                        <td>{{$payment->status}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 
-                        <div  class="col-sm-12 col-md-6">
-                            <div {{--style="margin-top: -60px;"--}} class="lgx-about-content-area">
-                                <div class="lgx-heading">
-                                    <h2 class="heading">IN GOOD COMPANY</h2>
-                                    <h3 class="subheading">A Poetry & Spoken Word Experience</h3>
-                                </div>
-                                <div class="lgx-about-content">
-                                    <p style="font-size: 20px;text-align: justify;" class="text">
-                                        "As the busy week winds down, a glimmer of hope emerges on the horizon as the
-                                        weekend approaches, promising days of relaxation ahead. That's precisely how
-                                        Thursday evenings can be described – a taste of the weekend's ambiance, though
-                                        not yet fully indulgent as Friday awaits its turn.
+                        <!-- Tickets Details Panels -->
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Your Tickets</h3>
+                            </div>
+                            <div class="panel-body">
+                                <!-- Iterate this part for each ticket -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        @foreach($tickets as $ticket)
+                                            <a href="{{asset($ticket->path)}}" style="margin: 4px;"
+                                               class="btn btn-primary" target="_blank">Download
+                                                Ticket {{$ticket->ticket_number}}</a>
+                                        @endforeach
+                                    </div>
+                                    <div class="panel-footer">
 
-                                        <br/>
-                                        <br/>
-                                        This makes Thursday the ideal
-                                        day to immerse oneself in the world of poetry and spoken word, to savour an
-                                        unplugged performance by a beloved artist, all while relishing the finest treats
-                                        from The Vanilla Moon. It's a simple yet sophisticated way to reconnect with
-                                        friends, expand your network, and enjoy a night out without any overwhelming
-                                        fuss."
-
-                                    </p>
-                                    <div class="section-btn-area">
-                                        {{-- <button id="usdButton" class="lgx-btn">USD</button>
-                                         <button id="zwlButton" class="lgx-btn lgx-btn-red lgx-scroll">ZWL
-                                             Ticket
-                                         </button>--}}
                                     </div>
                                 </div>
+                                <!-- End of a single ticket panel -->
+
+                                <!-- Repeat the above panel for more tickets as needed -->
                             </div>
                         </div>
+
 
                     </div>
                 </div><!-- //.CONTAINER -->
@@ -338,8 +266,6 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
     </section>
     <!--ABOUT END-->
 
-
-    <!--FOOTER-->
     <footer>
         <div id="lgx-footer" class="lgx-footer"> <!--lgx-footer-white-->
             <div class="lgx-inner-footer">
@@ -359,16 +285,14 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
                                         <span>Subscribe</span>
                                     </button>
                                 </div>
-                            </form>
-
-                            <!--//.SUBSCRIBE-->
+                            </form> <!--//.SUBSCRIBE-->
                         </div>
                     </div>
                 </div>
+
                 <div class="lgx-footer-bottom">
                     <div class="lgx-copyright">
-                        <p><span>©</span> {{date('Y')}} In Good Company powered by <a
-                                href="https://leadingdigital.africa" target="_blank">Leading Digital.</a></p>
+                        <p> <span>©</span> {{date('Y')}} In Good Company  powered by <a href="https://leadingdigital.africa" target="_blank">Leading Digital.</a></p>
                     </div>
                 </div>
 
@@ -377,8 +301,6 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
             <!-- //.footer Middle -->
         </div>
     </footer>
-    <!--FOOTER END-->
-
 
 </div>
 <!--//.LGX SITE CONTAINER-->
@@ -433,16 +355,14 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
 <!-- CUSTOM SCRIPT -->
 <script src="{{ asset('assets/js/custom.script.js') }}"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Assuming an exchange rate of 1 USD to 100 ZWL
-        const exchangeRate = 38000;
+        const exchangeRate = 100;
 
         // Base price in USD
-        let basePriceUSD = 10;
+        let basePriceUSD = 59;
 
         // Function to update price display and hidden fields
         function updatePriceDisplay(currency) {
@@ -486,9 +406,7 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
         // Initial update to set the default state
         updatePriceDisplay('USD');
     });
-
 </script>
-
 <script>
     $(document).ready(function () {
         $('#lgx-submit-btn').click(function (e) {
@@ -523,8 +441,6 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
 
 
 </script>
-
-
 
 </body>
 </html>

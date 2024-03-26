@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->longText('pin')->nullable();
             $table->string('city')->nullable();
+            $table->integer('number_of_tickets')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();
         });

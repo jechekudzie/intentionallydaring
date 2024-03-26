@@ -18,6 +18,28 @@
             /* Adjust the size and position of elements to fit mobile screens */
         }
 
+        .price-header {
+            font-family: 'Arial', sans-serif; /* You can change this to match your design */
+            font-size: 24px; /* Adjust size as needed */
+            color: #333; /* Adjust color as needed */
+            /* Add other styles for your h3 element as needed */
+        }
+
+        .price-header .price {
+            font-size: 48px; /* Adjust size as needed */
+            font-weight: bold; /* Adjust weight as needed */
+            color: #f9fc00; /* This is an orange color; adjust as needed */
+            /* Add other styles for your price as needed */
+        }
+
+        .price-header .time-period {
+            font-size: 24px; /* Adjust size as needed */
+            font-weight: normal; /* Adjust weight as needed */
+            vertical-align: super;
+            margin-left: 5px; /* Adjust spacing as needed */
+
+        }
+
     </style>
 </head>
 <body>
@@ -85,6 +107,9 @@
                     <p> {!!$ticket['html'] !!} </p>
 
                     <p style="font-weight: bolder;">ADMIT ONE</p>
+                    <h3 class="title price-header">
+                        <span class="price">$10</span>
+                    </h3>
                 </div>
             </div>
         </div>
@@ -104,7 +129,7 @@
 
 <script>
 
-    window.onload = function() {
+    /*window.onload = function() {
         rendAndDownload(); // If you want to download and upload all tickets as PDFs when the page loads
         // downloadAllImages(); // Uncomment if you also want to download and upload all tickets as images when the page loads
     };
@@ -118,7 +143,7 @@
                 printPDFAndUpload(ticketId, ticketNumber);
             }, index * 2000);
         });
-    }
+    }*/
 
     function downloadAllTickets() {
         document.querySelectorAll('.ticket-row').forEach(ticket => {
