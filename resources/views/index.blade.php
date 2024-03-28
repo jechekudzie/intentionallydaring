@@ -106,7 +106,7 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
         }
 
         .background-div {
-            background: url('{{ asset('banner (1).svg') }}') no-repeat center center;
+            background: url('{{ asset('banner.jpg') }}') no-repeat center center;
             background-size: cover;
             width: 100%;
             height: 100vh;
@@ -442,7 +442,7 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
         const exchangeRate = 38000;
 
         // Base price in USD
-        let basePriceUSD = 10;
+        let basePriceUSD = 1.00;
 
         // Function to update price display and hidden fields
         function updatePriceDisplay(currency) {
@@ -525,6 +525,18 @@ This makes Thursday the ideal day to immerse oneself in the world of poetry and 
 </script>
 
 
-
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/6603b5691ec1082f04dbcf0e/1hpv7p9nj';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

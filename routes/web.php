@@ -20,12 +20,16 @@ Route::get('/generate_qrcode', [\App\Http\Controllers\QrCodeController::class, '
 Route::get('/generate_qrcode_all', [\App\Http\Controllers\QrCodeController::class, 'generateAll'])->name('generate_qrcode_all');
 Route::get('/generate_qrcode_general', [\App\Http\Controllers\QrCodeController::class, 'generateQrGeneral'])->name('generate_qrcode_general');
 Route::post('/pay-now', [\App\Http\Controllers\PaymentsController::class, 'initiatePayment'])->name('initiate_payment');
-Route::get('/paynow/return', [\App\Http\Controllers\PaymentsController::class, 'checkPayment'])->name('check_payment');
+Route::get('/paynow/return/{reference}', [\App\Http\Controllers\PaymentsController::class, 'checkPayment'])->name('check_payment');
 
 Route::get('/confirmation', [\App\Http\Controllers\PaymentsController::class, 'confirmation'])->name('check_payment');
 Route::get('/igc/{reference}', [\App\Http\Controllers\PaymentsController::class, 'orderDetails'])->name('order_details');
 
 Route::post('/upload-ticket', [\App\Http\Controllers\QrCodeController::class,'upload'])->name('ticket.upload');
+
+//admin
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+Route::post('/admin/ticket/status', [\App\Http\Controllers\AdminController::class, 'updateStatus'])->name('record-ticket');
 
 
 Route::post('/subscribe', [SubscriptionController::class, 'store']);
